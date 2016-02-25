@@ -20,7 +20,7 @@ nav {
 
 #scramble {
     color: #464646;
-    font-size: 1.7vmax;/*1.6vw;*/
+    font-size: 1.7vmax;
     text-align: center;
 }
 
@@ -50,10 +50,15 @@ footer {
     width: 100%;
     height: 30px;
     font-size: 11px;
-    color: #525252;
+    color: #464646;
     font-weight: normal;
     text-align: center;
     line-height: 30px;
     position: fixed;
     bottom: 0;
+}
+
+footer a {
+    text-decoration: none;
+    color: #464646;
 }

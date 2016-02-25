@@ -53,6 +53,7 @@ document.addEventListener('keydown', function(event) {
     if (event.keyCode == 32) {
         if(timer.lock) {
             timer.clear();
+            scramble.generate(25);
         }
         else {
             document.getElementById("timer").style.color= "red";
