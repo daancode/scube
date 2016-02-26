@@ -24,7 +24,7 @@ nav {
     text-align: center;
 }
 
-aside {
+#sidebar {
     width: 120px;
     background-color: #141414;
     overflow: auto;
@@ -61,4 +61,26 @@ footer {
 footer a {
     text-decoration: none;
     color: #464646;
+}
+    
+#times {
+    cursor: pointer;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}    
+    
+#times > li {
+    font-size: 30px;
+    font-weight: bold;
+    color: #464646;
+    line-height: 40px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+#times > li:hover {
+    background-color: red;
+    color: #141414;
 }

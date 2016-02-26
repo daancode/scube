@@ -53,7 +53,11 @@ document.addEventListener('keydown', function(event) {
     if (event.keyCode == 32) {
         if(timer.lock) {
             timer.clear();
-            scramble.generate(25);
+            var time = document.getElementById("timer").innerHTML;
+            $("#times").prepend($('<li class="time" id="' + timeId + '">').text(time));
+            $("#sidebar").getNiceScroll().resize();
+            localStorage.setItem(timeId++, time);
+            localStorage.setItem("nextTimeId", timeId);
         }
         else {
             document.getElementById("timer").style.color= "red";
@@ -68,6 +72,7 @@ document.addEventListener('keyup', function(event) {
             document.getElementById("timer").style.color="#1e1e1e";
         } 
         else {
+            scramble.generate(25);
             timer.lock = false;
         }
     }

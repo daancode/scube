@@ -4,13 +4,30 @@
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
-    <title>Timer for Speedcubers</title>
+    <title>Scube Timer</title>
+    
     <link rel="stylesheet" href="css/style.css"/>
-    <script src="js/timer.js"></script>
+    <script src="js/jquery-1.12.1.min.js"></script>
+    <script src="js/jquery.nicescroll.min.js"></script>
+    <script src="js/storage.js"></script>
     <script src= "js/scramble.js"></script>
+    <script src="js/timer.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            $("#sidebar").niceScroll({
+                touchbehavior: false,
+                cursoropacitymax: 0.0,
+                background: "#191919",
+                grabcursorenabled: false,
+                nativeparentscrolling: false
+            });
+        });
+    </script>
+    
 </head>
 
-<body onload="scramble.generate(25)">
+<body onload="scramble.generate(25);loadFromStorage();">
     <nav>
         <div id="logo">
             <img src="http://i.imgur.com/4VsA8xG.png" width="60" height="60"></img>
@@ -19,14 +36,22 @@
         <div style="clear:both;"></div>
     </nav>
 
-    <aside>
+    <div id="sidebar">
+        <ul id="times">
+        </ul>
+    </div>
 
-    </aside>
-
+    <script>
+         $("#times").on("click", ".time", function(event) {
+            localStorage.removeItem(this.id);
+            $(this).remove();
+         });
+    </script>
+    
     <div id="timer">0.00</div>
     
     <footer>
-        &copy;<a href="https://github.com/da-an" target="_blank"> Damian Barczyński </a>2016
+        &copy; 2016 <a href="https://github.com/da-an" target="_blank"> Damian Barczyński </a>
     </footer>
 </body>
     
