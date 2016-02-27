@@ -1,79 +1,40 @@
+'use strict';
+
 function Timer() {
     this.timer = 0;
-    this.seconds = 0;
-    this.minutes = 0;
     this.lock = false;
     this.startTime = 0;
+    this.time = 0;
 }
 
 Timer.prototype.update = function () {
-    var currentTime = new Date();
-    this.seconds = ((currentTime - this.startTime) / 1e3).toFixed(2);
-    
-    if(this.seconds >= 60) {
-        this.minutes += 1;
-        this.startTime = currentTime;
-        this.seconds = 0;
-    }
-    
-    var set = (arg) => {
-        return arg < 10 ? "0" + arg : arg;
-    }
-    
-    document.getElementById("timer").innerHTML = 
-        this.minutes > 0 ? this.minutes + ":" + set(this.seconds) : this.seconds;
-    
+    this.time = (new Date() - this.startTime);     
+    document.getElementById("timer").innerHTML = this.parse(this.time);    
+}
+
+Timer.prototype.parse = function (time) {
+    var min = (time / 1e3 / 60) << 0;
+    var sec = (time / 1e3 % 60).toFixed(2);
+    return min > 0 ? min + ":" + (sec < 10 ? "0" + sec : sec) : sec;
+}
+
+Timer.prototype.start = function () {
+    this.lock = true;
+    this.initialize();
+    this.startTime = new Date();
     var handle = this;
-    this.timer = setTimeout(function() {
+    this.timer = setInterval(function() {
         handle.update();
     });
 }
 
 Timer.prototype.clear = function () {
-    clearTimeout(this.timer);
+    clearInterval(this.timer);
     this.timer = 0;
 }
 
 Timer.prototype.initialize = function () {
     this.clear();
-    this.seconds = this.minutes = 0;
+    this.time = 0;
     document.getElementById("timer").innerHTML = "0.00";
 }
-
-Timer.prototype.start = function () {
-    this.startTime = new Date();
-    this.lock = true;
-    this.initialize();
-    this.update();
-}
-
-var timer = new Timer;
-
-document.addEventListener('keydown', function(event) {
-    if (event.keyCode == 32) {
-        if(timer.lock) {
-            timer.clear();
-            var time = document.getElementById("timer").innerHTML;
-            $("#times").prepend($('<li class="time" id="' + timeId + '">').text(time));
-            $("#sidebar").getNiceScroll().resize();
-            localStorage.setItem(timeId++, time);
-            localStorage.setItem("nextTimeId", timeId);
-        }
-        else {
-            document.getElementById("timer").style.color= "red";
-        }
-    } 
-}, true);
-
-document.addEventListener('keyup', function(event) {
-    if (event.keyCode == 32) {
-        if(!timer.lock) {
-            timer.start();
-            document.getElementById("timer").style.color="#1e1e1e";
-        } 
-        else {
-            scramble.generate(25);
-            timer.lock = false;
-        }
-    }
-}, true);

@@ -1,3 +1,5 @@
+'use strict';
+
 function Scramble() {
     this.last = this.random(6);
     this.selected = this.random(6);
@@ -30,5 +32,3 @@ Scramble.prototype.generate = function (length) {
     }
     document.getElementById("scramble").innerHTML = scramble;
 }
-
-var scramble = new Scramble;
