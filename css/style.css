@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background-color: #6d6d6d;
+    background-color: #141414;
     font-weight: bold;
     font-family: sans-serif;
     color: red;
@@ -76,8 +76,8 @@ nav {
     font-size:  17vmax;
     position: fixed;
     top: 60px; left: 140px; 
-    right: 0px; bottom: 30px;
-    color: #212121;
+    right: 140px; bottom: 30px;
+    color: #00c8ff;
     justify-content: center;
     align-content: center;
     flex-direction: column;
@@ -116,6 +116,7 @@ footer a {
 }
 
 #stats > li {
+    width: 140px;
     font-size: 20px;
     font-weight: bold;
     text-align: center;

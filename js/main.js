@@ -1,38 +1,37 @@
+/*jslint browser: true*/
+/*global $, jQuery, alert*/
+
 'use strict';
 
-var scramble = new Scramble();
 var timer = new Timer();
 
 document.addEventListener('keydown', function (event) {
     if (event.keyCode === 32) {
         if (timer.lock) {
             timer.stop();
-            var time = document.getElementById("timer").innerHTML;
-            saveTime(time);
-            $("#times").prepend($('<li class="button" id="' + (session.length - 1) + '">').text(time));
-            $("#sidebar").getNiceScroll().resize();
+            appendEntry(timer.time);
+            updateEntries();
             refreshStats();
-        }
-        else {
-            document.getElementById("timer").style.color = "#00c8ff";
+            $("#sidebar").getNiceScroll().resize();
+        } else {
+            document.getElementById("timer").style.color = "red";
         }
     } 
 }, true);
 
-document.addEventListener('keyup', function(event) {
-    if (event.keyCode == 32) {
-        if(!timer.lock) {
+document.addEventListener('keyup', function (event) {
+    if (event.keyCode === 32) {
+        if (!timer.lock) {
             timer.start();
-            document.getElementById("timer").style.color = "#212121";
-        } 
-        else {
-            scramble.generate(25);
+            document.getElementById("timer").style.color = "#00c8ff";
+        } else {
             timer.lock = false;
+            getScramble(25);
         }
     }
 }, true);
 
-$(document).ready(function() {            
+$(document).ready(function () {
     $("#times").niceScroll({
         touchbehavior: false,
         cursoropacitymax: 0.0,
@@ -40,4 +39,24 @@ $(document).ready(function() {
         grabcursorenabled: false,
         nativeparentscrolling: false
     });
+    
+    $("#stats").niceScroll({
+        touchbehavior: false,
+        cursoropacitymax: 0.0,
+        background: "#191919",
+        grabcursorenabled: false,
+        nativeparentscrolling: false
+    });
+    
+    getScramble(25);
+    updateEntries();
+    refreshStats();
+});
+
+$("#times").on("click", ".button", function (event) {
+    removeEntry(this.id);
+});
+
+$("#reset").on("click", function (event) {
+    removeAllEntries();
 });

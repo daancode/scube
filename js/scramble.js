@@ -15,20 +15,25 @@ function Scramble() {
 
 Scramble.prototype.random = function (value) {
     return Math.floor(Math.random() * value);
-}
+};
 
 Scramble.prototype.nextMove = function () {
-    while(this.selected == this.last || this.selected == this.notation[this.last][3]) {
+    while (this.selected === this.last || this.selected === this.notation[this.last][3]) {
         this.selected = this.random(6);
     }
     this.last = this.selected;
     return this.notation[this.selected][this.random(3)];
-}
+};
 
 Scramble.prototype.generate = function (length) {
-    var scramble = "";
-    for(var i = 0; i < length; ++i) {
+    var scramble = "", i;
+    for (i = 0; i < length; i += 1) {
         scramble += this.nextMove() + " ";
     }
     document.getElementById("scramble").innerHTML = scramble;
+};
+
+function getScramble(length) {
+    var scramble = new Scramble();
+    scramble.generate(length);
 }
