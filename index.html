@@ -13,18 +13,10 @@
     <script src="js/storage.js"></script>
     <script src= "js/scramble.js"></script>
     <script src="js/timer.js"></script>
-    <script src="js/listeners.js"></script>
+    <script src="js/main.js"></script>
     
     <script>
-        $(document).ready(function() {
-            $("#times").niceScroll({
-                touchbehavior: false,
-                cursoropacitymax: 0.0,
-                background: "#191919",
-                grabcursorenabled: false,
-                nativeparentscrolling: false
-            });
-        });
+        
     </script>
     
 </head>
@@ -42,18 +34,17 @@
     
     <script>
          $("#times").on("click", ".button", function(event) {
-            localStorage.removeItem(this.id);
-            $(this).remove();
+            $("#times").empty();
+            eraseTime(this.id);
          });
         
         $("#reset").on("click", function() {
-            $("#times").empty();
-            localStorage.clear();
+            clearSession();
         });
     </script>
     
     <div id="timer">0.00</div>
-    
+        
     <footer>
         &copy; 2016 <a href="https://github.com/da-an" target="_blank"> Damian Barczyński </a>
     </footer>

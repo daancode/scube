@@ -1,17 +1,33 @@
 'use strict';
 
-var timeId = 0;
+var session = [];
 
-function pushToStorage(time) {
-    localStorage.setItem(timeId++, time);
-    localStorage.setItem("nextId", timeId);
+function saveTime(time) {
+    if(!session) {
+        session = [];
+    }
+    session.push(time);
+    localStorage.setItem("session", JSON.stringify(session));
+}
+
+function eraseTime(id) {
+    session.splice(id, 1);
+    localStorage.setItem("session", JSON.stringify(session));
+    loadFromStorage();
 }
 
 function loadFromStorage() {
-    timeId = localStorage.getItem("nextId");
-    for(var object in localStorage) {
-        if(object != "nextId") {
-            $("#times").prepend($('<li class="button" id="' + object + '">').text(localStorage.getItem(object)));
-        }
+    session = JSON.parse(localStorage.getItem("session"));
+    if(session){
+        var i = 0;
+        session.forEach(function(obj) {
+            $("#times").prepend($('<li class="button" id="' + i++ + '">').text(obj));
+        });
     }
+}
+
+function clearSession() {
+    session = [];
+    $("#times").empty();
+    localStorage.setItem("session", JSON.stringify(session));
 }

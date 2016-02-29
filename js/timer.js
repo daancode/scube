@@ -28,13 +28,13 @@ Timer.prototype.start = function () {
     });
 }
 
-Timer.prototype.clear = function () {
+Timer.prototype.stop = function () {
     clearInterval(this.timer);
     this.timer = 0;
 }
 
 Timer.prototype.initialize = function () {
-    this.clear();
+    this.stop();
     this.time = 0;
     document.getElementById("timer").innerHTML = "0.00";
 }
