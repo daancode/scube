@@ -11,6 +11,7 @@ document.addEventListener('keydown', function (event) {
             saveTime(time);
             $("#times").prepend($('<li class="button" id="' + (session.length - 1) + '">').text(time));
             $("#sidebar").getNiceScroll().resize();
+            refreshStats();
         }
         else {
             document.getElementById("timer").style.color = "#00c8ff";

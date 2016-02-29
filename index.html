@@ -21,7 +21,7 @@
     
 </head>
 
-<body onload="scramble.generate(25);loadFromStorage();">
+<body onload="scramble.generate(25);loadFromStorage();refreshStats();">
     <nav>
         <div id="logo">
             <img src="https://i.imgur.com/YAL3LAA.png" width="60" height="60"></img>
@@ -45,6 +45,14 @@
     
     <div id="timer">0.00</div>
         
+    <ul id="stats">
+        <li><div class="title">Session Stats</div></li>
+        <li><div class="label">Best Time</div></li>
+        <li><div class="stat" id="bestTime">-.--</div></li>
+        <li><div class="label">Worst Time</div></li>
+        <li><div class="stat" id="worstTime">-.--</div></li>
+    </ul>
+    
     <footer>
         &copy; 2016 <a href="https://github.com/da-an" target="_blank"> Damian Barczyński </a>
     </footer>
